@@ -1,5 +1,6 @@
 <resources>
   <string name="app_name">Stock Hawk</string>
+  <string name="stock_detail_title">Stock Detail</string>
 
   <string name="action_example">Example action</string>
 
@@ -11,4 +12,7 @@
   <string name="input_prefill"></string>
   <string name="widget_title">Today\'s Market</string>
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
+  <string name="no_network">No network connectivity. Please try again later.</string>
+  <string name="no_data">No data available.</string>
+  <string name="history_date_format">yyyy-MM-dd</string>
 </resources>

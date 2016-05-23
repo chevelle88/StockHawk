@@ -6,9 +6,11 @@
       android:title="@string/action_change_units"
       android:icon="@drawable/ic_attach_money_white_24dp"
       android:orderInCategory="99"
+      android:contentDescription="Change from percent value to dollar value"
       app:showAsAction="always"/>
   <item android:id="@+id/action_settings"
       android:title="@string/action_settings"
       android:orderInCategory="100"
+      android:contentDescription="App settings"
       app:showAsAction="never" />
 </menu>

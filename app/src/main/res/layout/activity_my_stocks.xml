@@ -12,6 +12,12 @@
       android:layout_height="match_parent"
       />
 
+  <android.widget.TextView
+      android:id="@+id/msg_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:textAlignment="center"/>
+
   <com.melnykov.fab.FloatingActionButton
       android:id="@+id/fab"
       android:layout_width="wrap_content"
@@ -19,6 +25,7 @@
       android:layout_gravity="bottom|right"
       android:layout_margin="16dp"
       android:src="@drawable/ic_add_white_24dp"
+      android:contentDescription="Add stock symbol"
       fab:fab_colorNormal="@color/material_blue_500"
       fab:fab_colorPressed="@color/material_blue_600"
       fab:fab_colorRipple="@color/ripple"

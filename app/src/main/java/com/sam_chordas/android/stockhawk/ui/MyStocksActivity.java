@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.TextView;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
@@ -51,6 +53,8 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   private QuoteCursorAdapter mCursorAdapter;
   private Context mContext;
   private Cursor mCursor;
+  private RecyclerView recyclerView;
+  private TextView msgView;
   boolean isConnected;
 
   @Override
@@ -63,7 +67,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
     isConnected = activeNetwork != null &&
         activeNetwork.isConnectedOrConnecting();
+
     setContentView(R.layout.activity_my_stocks);
+
     // The intent service is for executing immediate pulls from the Yahoo API
     // GCMTaskService can only schedule tasks, they cannot execute immediately
     mServiceIntent = new Intent(this, StockIntentService.class);
@@ -76,20 +82,36 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         networkToast();
       }
     }
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+    msgView = (TextView)findViewById(R.id.msg_view);
+
+    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
     mCursorAdapter = new QuoteCursorAdapter(this, null);
     recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
             new RecyclerViewItemClickListener.OnItemClickListener() {
-              @Override public void onItemClick(View v, int position) {
-                //TODO:
-                // do something on item click
+              @Override
+              public void onItemClick(View v, int position) {
+                QuoteCursorAdapter.ViewHolder stockView =
+                        (QuoteCursorAdapter.ViewHolder) recyclerView.getChildViewHolder(v);
+                String stockSymbol = (String) stockView.symbol.getText();
+                String stockBid = (String) stockView.bidPrice.getText();
+                String stockPriceChange = (String) stockView.change.getText();
+
+                // Create intent along with data to launch StockDetailActivity.
+                Intent stockIntent = new Intent(recyclerView.getContext(), StockDetailActivity.class);
+                stockIntent.putExtra(StockDetailActivity.STOCK_SYMBOL, stockSymbol);
+                stockIntent.putExtra(StockDetailActivity.STOCK_BID_PRICE, stockBid);
+                stockIntent.putExtra(StockDetailActivity.STOCK_PRICE_CHANGE, stockPriceChange);
+
+                // Show detail activity.
+                recyclerView.getContext().startActivity(stockIntent);
               }
             }));
-    recyclerView.setAdapter(mCursorAdapter);
 
+    recyclerView.setAdapter(mCursorAdapter);
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.attachToRecyclerView(recyclerView);
@@ -153,13 +175,35 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
       // are updated.
       GcmNetworkManager.getInstance(this).schedule(periodicTask);
     }
+
   }
 
 
   @Override
   public void onResume() {
     super.onResume();
+
     getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
+
+    if (isConnected) {
+
+      if ((mCursor != null) && (mCursor.getCount() > 0)) {
+        recyclerView.setVisibility(View.VISIBLE);
+        msgView.setVisibility(View.GONE);
+      }
+      else {
+        recyclerView.setVisibility(View.GONE);
+        msgView.setVisibility(View.VISIBLE);
+        msgView.setText(R.string.no_data);
+      }
+
+    }
+    else {
+      recyclerView.setVisibility(View.GONE);
+      msgView.setVisibility(View.VISIBLE);
+      msgView.setText(R.string.no_network);
+    }
+
   }
 
   public void networkToast(){
