@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import com.db.chart.view.AxisController.LabelPosition;
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.rest.Utils;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -81,7 +81,7 @@ public class StockGraphFragment extends Fragment {
         super.onActivityCreated(saveInstanceState);
 
         Intent stockInfo = getActivity().getIntent();
-        String stockSymbol = stockInfo.getStringExtra(StockDetailActivity.STOCK_SYMBOL);
+        String stockSymbol = stockInfo.getStringExtra(Utils.STOCK_SYMBOL);
 
         new StockHistoryTask().execute(stockSymbol);
     }

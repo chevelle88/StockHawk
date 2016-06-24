@@ -102,9 +102,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
                 // Create intent along with data to launch StockDetailActivity.
                 Intent stockIntent = new Intent(recyclerView.getContext(), StockDetailActivity.class);
-                stockIntent.putExtra(StockDetailActivity.STOCK_SYMBOL, stockSymbol);
-                stockIntent.putExtra(StockDetailActivity.STOCK_BID_PRICE, stockBid);
-                stockIntent.putExtra(StockDetailActivity.STOCK_PRICE_CHANGE, stockPriceChange);
+                stockIntent.putExtra(Utils.STOCK_SYMBOL, stockSymbol);
+                stockIntent.putExtra(Utils.STOCK_BID_PRICE, stockBid);
+                stockIntent.putExtra(Utils.STOCK_PRICE_CHANGE, stockPriceChange);
 
                 // Show detail activity.
                 recyclerView.getContext().startActivity(stockIntent);
@@ -128,7 +128,14 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                   Cursor c = getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
                       new String[] { QuoteColumns.SYMBOL }, QuoteColumns.SYMBOL + "= ?",
                       new String[] { input.toString() }, null);
-                  if (c.getCount() != 0) {
+
+                  boolean stockExists = ((c != null) && (c.getCount() != 0));
+
+                  if (c != null) {
+                    c.close();
+                  }
+
+                  if (stockExists) {
                     Toast toast =
                         Toast.makeText(MyStocksActivity.this, "This stock is already saved!",
                             Toast.LENGTH_LONG);

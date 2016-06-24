@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.rest.Utils;
 
 /**
  * Created by chevelle on 5/9/16.
@@ -37,8 +38,8 @@ public class StockInfoFragment extends Fragment {
         TextView bidPriceView = (TextView)getActivity().findViewById(R.id.bidPrice);
         TextView priceChangeView = (TextView)getActivity().findViewById(R.id.stockChange);
 
-        symbolView.setText(stockInfo.getStringExtra(StockDetailActivity.STOCK_SYMBOL));
-        bidPriceView.setText("Bid Price: " + stockInfo.getStringExtra(StockDetailActivity.STOCK_BID_PRICE));
-        priceChangeView.setText("Price Change: " + stockInfo.getStringExtra(StockDetailActivity.STOCK_PRICE_CHANGE));
+        symbolView.setText(stockInfo.getStringExtra(Utils.STOCK_SYMBOL).toUpperCase());
+        bidPriceView.setText("Bid Price: " + stockInfo.getStringExtra(Utils.STOCK_BID_PRICE));
+        priceChangeView.setText("Price Change: " + stockInfo.getStringExtra(Utils.STOCK_PRICE_CHANGE));
     }
 }

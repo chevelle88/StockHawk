@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+  <string name="app_name">بيع أسهم عديمة القيمة</string>
+  <string name="stock_detail_title">تفاصيل الأسهم</string>
+
+  <string name="action_example">مثال على الإجراء</string>
+
+  <string name="action_settings">إعدادات</string>
+  <string name="action_change_units">تغيير الوحدات</string>
+  <string name="symbol_search">البحث عن الرمز</string>
+  <string name="content_test">البحث عن رمز الأسهم</string>
+  <string name="input_hint">FB</string>
+  <string name="input_prefill"/>
+  <string name="widget_title">السوق اليوم</string>
+  <string name="network_toast">أه-أوه! يتطلب هذا التطبيق اتصال بالإنترنت</string>
+  <string name="no_network">لا يوجد اتصال بالشبكة. يُرجى المحاولة مرة أخرى لاحقًا.</string>
+  <string name="no_data">لا تتوفر بيانات.</string>
+<!--
+  <string name="history_date_format">تنسيق التاريخ: yyyy-MM-dd</string>
+ -->
+</resources>

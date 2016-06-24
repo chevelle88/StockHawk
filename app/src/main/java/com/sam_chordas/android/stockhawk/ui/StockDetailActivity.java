@@ -10,11 +10,6 @@ import com.sam_chordas.android.stockhawk.R;
  */
 public class StockDetailActivity extends AppCompatActivity {
 
-    // Stock Keys
-    public static final String STOCK_SYMBOL = "stockSymbol";
-    public static final String STOCK_BID_PRICE = "stockBidPrice";
-    public static final String STOCK_PRICE_CHANGE = "stockPriceChange";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

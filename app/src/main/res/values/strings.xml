@@ -14,5 +14,6 @@
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
   <string name="no_network">No network connectivity. Please try again later.</string>
   <string name="no_data">No data available.</string>
-  <string name="history_date_format">yyyy-MM-dd</string>
+  <string name="history_date_format" translatable="false">yyyy-MM-dd</string>
+
 </resources>

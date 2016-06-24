@@ -18,6 +18,11 @@ public class Utils {
 
   public static boolean showPercent = true;
 
+  // Stock Key Names
+  public static final String STOCK_SYMBOL = "stockSymbol";
+  public static final String STOCK_BID_PRICE = "stockBidPrice";
+  public static final String STOCK_PRICE_CHANGE = "stockPriceChange";
+
   public static ArrayList quoteJsonToContentVals(String JSON){
     ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
     JSONObject jsonObject = null;
